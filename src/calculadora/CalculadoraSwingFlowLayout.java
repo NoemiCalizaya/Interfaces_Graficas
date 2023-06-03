@@ -46,6 +46,7 @@ public class CalculadoraSwingFlowLayout extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             String command = e.getActionCommand();
+            System.out.println(command);
 
             switch (command) {
                 case "+":

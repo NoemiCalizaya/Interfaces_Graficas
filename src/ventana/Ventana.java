@@ -13,8 +13,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
 
 /*JFrame es una clase que representa una ventana o marco de nivel superior en una aplicación GUI en Java.
 Se utiliza como el contenedor principal para la interfaz gráfica de usuario de una aplicación.
@@ -34,6 +36,8 @@ public class Ventana extends JFrame {
 	public JTextField cajaTexto1;
 	public JTextField cajaTexto2;
 	public JTextField cajaTexto3;
+	JRadioButton radioBoton1;
+	JRadioButton radioBoton2;
 	
 	public Ventana() {
 					//ancho-alto
@@ -53,6 +57,7 @@ public class Ventana extends JFrame {
 		colocarEtiquetas();
 		colocarCajasTexto();
 		colocarBotones();
+		colocarRadioBotones();
 	}
 	private void colocarPaneles() {
 		//Instanciamos el Panel
@@ -107,19 +112,25 @@ public class Ventana extends JFrame {
 		panel.add(cajaTexto2);
 		
 		cajaTexto3 = new JTextField();
-		cajaTexto3.setBounds(80,290,120,30);
+		cajaTexto3.setBounds(80,300,100,30);
 		panel.add(cajaTexto3);
 		
 	}
 	
 	private void colocarBotones() {
 		JButton button1 = new JButton();
-		button1.setBounds(80,250,100,20);
-		button1.setText("MULTIPLICAR");
+		button1.setBounds(100,250,60,40);
+		//button1.setText("MULTIPLICAR");
 		button1.setForeground(Color.WHITE);
 		button1.setOpaque(true);//Establecemos pintar el fondo de la etiqueta
 		button1.setBackground(Color.DARK_GRAY);
 		
+		//Creamos la imagen con ImageIcon
+		ImageIcon imagenb = new ImageIcon("C://Users//NOEMI//Pictures//suma.jpg");
+		//Colocamos la imagen dentro del botón																											
+																												//tipo de escalado - Un escalado suave
+				//Vamos a redimensionar la imagen al tamaño del botón en setIcon();   							//para no perder calidad de pixeles
+		button1.setIcon(new ImageIcon(imagenb.getImage().getScaledInstance(button1.getWidth(), button1.getHeight(), Image.SCALE_SMOOTH)));
 		panel.add(button1);
 		
 		//Agregando Evento de tipo ActionListener
@@ -138,7 +149,7 @@ public class Ventana extends JFrame {
 				try {
 					numero1 = Integer.parseInt(cajaTexto1.getText());
 					numero2 = Integer.parseInt(cajaTexto2.getText());
-					cajaTexto3.setText(String.valueOf(numero1*numero2));
+					cajaTexto3.setText(String.valueOf(numero1*numero2)+" "+radioBoton1.getActionCommand());
 				}catch(Exception e){
 					JOptionPane.showMessageDialog(null, "Las cajas de texto solo aceptan datos numéricos.");
 				}
@@ -148,11 +159,17 @@ public class Ventana extends JFrame {
 		button1.addActionListener(oyenteDeAccion);
 	}
 	
-//	private void colocarRadioBotones() {
-//		JRadioButton radioBoton1 = new JRadioButton("", true);
-//		
-//		ButtonGroup grupo = new ButtonGroup();
-//		grupo.add(radioBoton1);
-//		
-//	}
+	private void colocarRadioBotones() {
+		radioBoton1 = new JRadioButton("Java");
+		radioBoton2 = new JRadioButton("Python");
+		radioBoton1.setBounds(80, 340, 100, 40);
+		radioBoton1.setSelected(true);
+		radioBoton2.setBounds(200, 340, 100, 40);
+		panel.add(radioBoton1);
+		panel.add(radioBoton2);
+		
+		ButtonGroup grupo = new ButtonGroup();
+		grupo.add(radioBoton1);
+		grupo.add(radioBoton2);
+	}
 }
